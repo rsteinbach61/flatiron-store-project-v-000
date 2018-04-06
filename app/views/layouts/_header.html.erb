@@ -4,5 +4,13 @@
         <% if !!@cart %>
           <li> <%= link_to "Cart", cart_path(current_cart) %></li>
         <% end %>
+        <% if !signed_in? %>
+          <li><%= link_to("Sign up", new_user_registration_path) %></li>
+          <li><%= link_to("sign in", user_session_path) %></li>
+        <% end %>
     </ul>
-</nav>
+
+  <% if signed_in? %>
+    <p>Signed in as <%= current_user.email %></p>
+    <p><%= link_to("Sign out", destroy_user_session_path, :method => 'delete') %></p>
+  <% end %>
